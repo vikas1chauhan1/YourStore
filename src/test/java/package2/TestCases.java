@@ -2,8 +2,11 @@ package package2;
 
 import java.io.IOException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -32,17 +35,17 @@ public class TestCases extends base {
 
 		int MacCount = 1;
 
-		p.getMacPage();
-		System.out.println("Verified that desired product page is open");
+	    boolean MP = p.getMacPage().isDisplayed();
+		System.out.println("Verified that desired product page is open = " + MP);
 
 		p.getAddCart().get(0).click();
 
-		p.getCartItem().isDisplayed();
-		System.out.println("Cart button, Number of Item and price is getting reflected");
+	    boolean	CI=p.getCartItem().isDisplayed();
+		System.out.println("Cart button, Number of Item and price is getting reflected = " + CI);
 
 
-		p.getPhonesPDA().isDisplayed();
-		System.out.println("link ‘Phones & PDAs’ is displayed on page");
+	    boolean	PDA=p.getPhonesPDA().isDisplayed();
+		System.out.println("link ‘Phones & PDAs’ is displayed on page = " + PDA);
 
 		p.getPhonesPDA().click();
 		int PhonePDACount = 3;
@@ -58,10 +61,12 @@ public class TestCases extends base {
 		p.getAddCart().get(1).click();
 		String cartItem1 = p.getCartItem().getText();
 		System.out.println("previous cart item = " + cartItem1);
-		p.getCartItem().isDisplayed();
-		System.out.println("updated item count and price on Cart button, is getting reflected");
+	    boolean	CIM=p.getCartItem().isDisplayed();
+		System.out.println("updated item count and price on Cart button, is getting reflected = " + CIM);
 
 		Thread.sleep(2000);
+		WebDriverWait wt=new WebDriverWait(driver, 10);
+		wt.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='btn btn-inverse btn-block btn-lg dropdown-toggle']")));
 		p.getCartItem().click();
 
 		for (int i = 0; i < 4; i++) {

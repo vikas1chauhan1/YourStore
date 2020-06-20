@@ -75,8 +75,8 @@ public class Path {
 		driver.findElement(Delete).click();
 	}
 
-	public void getMacPage() {
-		driver.findElement(MacPage).isDisplayed();
+	public WebElement getMacPage() {
+		return driver.findElement(MacPage);
 	}
 
 	public List<WebElement> getTotalProduct() {
